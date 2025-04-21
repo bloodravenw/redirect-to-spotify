@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="tr">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spotify'a Yönlendiriliyorsunuz</title>
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8CV5JV81S5"></script>
     <script>
@@ -8,12 +12,24 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-8CV5JV81S5');
-    </script>
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="refresh" content="0; url=https://open.spotify.com/user/g1ephv4oprdsupnw1dqzo29my?si=1IJsAckvQwmX6SaOix6_-g" />
-    <title>Spotify'a Yönlendiriliyorsunuz</title>
+      // Olay gönderip sonra yönlendirme
+      setTimeout(function () {
+        gtag('event', 'redirect_to_spotify', {
+          event_category: 'redirect',
+          event_label: 'GitHub Link',
+          transport_type: 'beacon',
+          event_callback: function() {
+            window.location.href = "https://open.spotify.com/user/g1ephv4oprdsupnw1dqzo29my?si=1IJsAckvQwmX6SaOix6_-g";
+          }
+        });
+
+        // Yedek zamanlayıcı (callback çalışmazsa 2 saniyede yönlendir)
+        setTimeout(function () {
+          window.location.href = "https://open.spotify.com/user/g1ephv4oprdsupnw1dqzo29my?si=1IJsAckvQwmX6SaOix6_-g";
+        }, 2000);
+      }, 500);
+    </script>
   </head>
   <body>
     <p>Spotify sayfan açılıyor...</p>
